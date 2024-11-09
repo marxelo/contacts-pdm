@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 
-class MyDatabaseHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
 
     private final Context context;
     private static final String DATABASE_NAME = "Contacts.db";
@@ -21,7 +21,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PHONE_NUMBER = "phone_number";
     private static final String COLUMN_BIRTHDAY = "birthday";
 
-    MyDatabaseHelper(@Nullable Context context) {
+    public DbHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
@@ -41,13 +41,13 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addBook(String title, String author, int pages){
+    public void addContact(String name, String phoneNumber, String birthday){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_NAME, title);
-        cv.put(COLUMN_PHONE_NUMBER, author);
-        cv.put(COLUMN_BIRTHDAY, pages);
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_PHONE_NUMBER, phoneNumber);
+        cv.put(COLUMN_BIRTHDAY, birthday);
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -67,12 +67,12 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String row_id, String title, String author, String pages){
+    void updateData(String row_id, String name, String phoneNumber, String birthday){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_NAME, title);
-        cv.put(COLUMN_PHONE_NUMBER, author);
-        cv.put(COLUMN_BIRTHDAY, pages);
+        cv.put(COLUMN_NAME, name);
+        cv.put(COLUMN_PHONE_NUMBER, phoneNumber);
+        cv.put(COLUMN_BIRTHDAY, birthday);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1){
