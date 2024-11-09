@@ -1,5 +1,7 @@
 package com.marcelo.contatos;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,11 +21,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final ActivityResultLauncher<Intent> addActivityLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_OK) {
+            recreate();
+        }
+    });
+
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     ImageView empty_imageview;
     TextView no_data;
-    DbHelper myDB;
+    DbHelper dbHelper;
     ArrayList<String> contact_id, contact_name, contact_phone, contact_birthday;
     CustomAdapter customAdapter;
 
@@ -37,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         empty_imageview = findViewById(R.id.empty_imageview);
         no_data = findViewById(R.id.no_data);
         add_button.setOnClickListener(v -> {
-                Intent intent = new Intent(MainActivity.this, AddActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, AddActivity.class);
+            addActivityLauncher.launch(intent);
         });
 
-        myDB = new DbHelper(MainActivity.this);
+        dbHelper = new DbHelper(MainActivity.this);
         contact_id = new ArrayList<>();
         contact_name = new ArrayList<>();
         contact_phone = new ArrayList<>();
@@ -63,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     void storeDataInArrays(){
-        Cursor cursor = myDB.readAllData();
+        Cursor cursor = dbHelper.readAllData();
         if(cursor.getCount() == 0){
             empty_imageview.setVisibility(View.VISIBLE);
             no_data.setVisibility(View.VISIBLE);

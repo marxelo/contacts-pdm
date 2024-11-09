@@ -30,6 +30,7 @@ public class AddActivity extends AppCompatActivity {
                 dbHelper.addContact(name_input.getText().toString().trim(),
                         phone_input.getText().toString().trim(),
                         birthday_input.getText().toString().trim());
+                setResult(RESULT_OK);
                 finish();
             } catch (SQLException e) {
                 Log.e("AddActivity", "Error creating DbHelper", e);
