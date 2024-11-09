@@ -50,13 +50,13 @@ public class DbHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_BIRTHDAY, birthday);
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Erro ao cadastrar o contato", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Contato cadastrado!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    Cursor readAllData(){
+    public Cursor readAllData(){
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -67,7 +67,7 @@ public class DbHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String row_id, String name, String phoneNumber, String birthday){
+    public void updateData(String row_id, String name, String phoneNumber, String birthday){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, name);
@@ -76,20 +76,20 @@ public class DbHelper extends SQLiteOpenHelper {
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1){
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Ocorreu um erro ao atualizar o contato", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(context, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Contato atualizado!", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    void deleteOneRow(String row_id){
+    public void deleteOneRow(String row_id){
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "_id=?", new String[]{row_id});
         if(result == -1){
-            Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Erro ao excluir o contato.", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(context, "Successfully Deleted.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Contato Excluído.", Toast.LENGTH_SHORT).show();
         }
     }
 
