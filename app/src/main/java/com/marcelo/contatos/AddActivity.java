@@ -2,8 +2,9 @@ package com.marcelo.contatos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.SQLException;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -24,14 +25,16 @@ public class AddActivity extends AppCompatActivity {
         phone_input = findViewById(R.id.phone_input);
         birthday_input = findViewById(R.id.birthday_input);
         add_button = findViewById(R.id.add_button);
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DbHelper myDB = new DbHelper(AddActivity.this);
-                myDB.addContact(name_input.getText().toString().trim(),
+        add_button.setOnClickListener(view -> {
+            try (DbHelper dbHelper = new DbHelper(AddActivity.this)) {
+                dbHelper.addContact(name_input.getText().toString().trim(),
                         phone_input.getText().toString().trim(),
                         birthday_input.getText().toString().trim());
+                finish();
+            } catch (SQLException e) {
+                Log.e("AddActivity", "Error creating DbHelper", e);
             }
+
         });
     }
 }

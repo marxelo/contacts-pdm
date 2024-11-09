@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marcelo.contatos.utils.DbHelper;
@@ -37,13 +36,9 @@ public class MainActivity extends AppCompatActivity {
         add_button = findViewById(R.id.add_button);
         empty_imageview = findViewById(R.id.empty_imageview);
         no_data = findViewById(R.id.no_data);
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        add_button.setOnClickListener(v -> {
                 Intent intent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(intent);
-
-            }
         });
 
         myDB = new DbHelper(MainActivity.this);
