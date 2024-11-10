@@ -1,6 +1,5 @@
 package com.marcelo.contatos;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.marcelo.contatos.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        holder.contact_id_txt.setText(String.valueOf(contact_id.get(position)));
+        holder.contact_id_txt.setText(Utils.getInitials(String.valueOf(contact_name.get(position))));
         holder.contact_name_txt.setText(String.valueOf(contact_name.get(position)));
         holder.contact_phone_txt.setText(String.valueOf(contact_phone.get(position)));
         holder.contact_birthday_txt.setText(String.valueOf(contact_birthday.get(position)));

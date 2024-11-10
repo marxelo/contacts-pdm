@@ -40,7 +40,7 @@
         android:layout_marginTop="16dp"
         android:autofillHints="birthday"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="date"
         android:hint="@string/birthday_input_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
