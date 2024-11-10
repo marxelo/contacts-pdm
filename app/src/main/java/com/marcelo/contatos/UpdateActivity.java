@@ -4,11 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
-import android.database.SQLException;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,9 +24,9 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        name_input = findViewById(R.id.name_input2);
-        phone_input = findViewById(R.id.phone_input2);
-        birthday_input = findViewById(R.id.birthday_input2);
+        name_input = findViewById(R.id.input_name);
+        phone_input = findViewById(R.id.input_phone);
+        birthday_input = findViewById(R.id.input_birthday);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
 

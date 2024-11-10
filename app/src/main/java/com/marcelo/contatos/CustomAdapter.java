@@ -59,16 +59,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.contact_phone_txt.setText(String.valueOf(contact_phone.get(position)));
         holder.contact_birthday_txt.setText(String.valueOf(contact_birthday.get(position)));
         //Recyclerview onClickListener
-        holder.mainLayout.setOnClickListener(view -> {
+        holder.mainLayout.setOnLongClickListener(view -> {
             Intent intent = new Intent(context, UpdateActivity.class);
             intent.putExtra("id", String.valueOf(contact_id.get(position)));
             intent.putExtra("name", String.valueOf(contact_name.get(position)));
             intent.putExtra("phone", String.valueOf(contact_phone.get(position)));
             intent.putExtra("birthday", String.valueOf(contact_birthday.get(position)));
             activity.startActivityForResult(intent, 1);
+            return false;
         });
 
-
+        holder.mainLayout.setOnClickListener(view -> {
+            Intent intent = new Intent(context, ShowActivity.class);
+            intent.putExtra("id", String.valueOf(contact_id.get(position)));
+            intent.putExtra("name", String.valueOf(contact_name.get(position)));
+            intent.putExtra("phone", String.valueOf(contact_phone.get(position)));
+            intent.putExtra("birthday", String.valueOf(contact_birthday.get(position)));
+            activity.startActivity(intent);
+        });
     }
 
     @Override

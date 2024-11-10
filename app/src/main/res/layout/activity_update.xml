@@ -8,13 +8,14 @@
     android:padding="30dp">
 
     <EditText
-        android:id="@+id/name_input2"
+        android:id="@+id/input_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:autofillHints="name"
         android:ems="10"
         android:hint="@string/contact_name"
+        android:minHeight="48dp"
         android:inputType="textPersonName"
         android:drawableStart="@drawable/ic_person"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/phone_input2"
+        android:id="@+id/input_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -30,13 +31,14 @@
         android:ems="10"
         android:inputType="phone"
         android:hint="@string/phone_number"
+        android:minHeight="48dp"
         android:drawableStart="@drawable/ic_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/input_name" />
 
     <EditText
-        android:id="@+id/birthday_input2"
+        android:id="@+id/input_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -45,9 +47,10 @@
         android:inputType="date"
         android:hint="@string/birthday_input_label"
         android:drawableStart="@drawable/ic_cake"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/input_phone" />
 
     <Button
         android:id="@+id/update_button"
@@ -59,7 +62,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday_input2" />
+        app:layout_constraintTop_toBottomOf="@+id/input_birthday" />
     <Button
         android:id="@+id/delete_button"
         android:layout_width="match_parent"

@@ -14,4 +14,6 @@
     <string name="confirm_delete_message">"Tem certeza que deseja excluir "</string>
     <string name="no_contact2">Nenhum contato cadastrado.</string>
     <string name="save">Salvar</string>
+    <string name="alt_cake">Icone bolo de aniversário</string>
+    <string name="alt_phone">Icone telefone</string>
 </resources>

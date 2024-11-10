@@ -73,6 +73,7 @@
                 android:id="@+id/ic_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/alt_phone"
                 app:srcCompat="@drawable/ic_phone"
                 tools:layout_editor_absoluteX="6dp"
                 app:layout_constraintStart_toStartOf="@+id/contact_name_txt"
@@ -84,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="4dp"
+                android:contentDescription="@string/alt_cake"
                 app:layout_constraintEnd_toStartOf="@+id/contact_birthday_txt"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_cake" />
