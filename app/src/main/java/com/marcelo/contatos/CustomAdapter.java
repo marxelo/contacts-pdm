@@ -54,7 +54,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        holder.contact_id_txt.setText(Utils.getInitials(String.valueOf(contact_name.get(position))));
+        holder.contact_id_txt.setText(Utils.getInitials(String.valueOf(contact_name.get(position)).toUpperCase()));
         holder.contact_name_txt.setText(String.valueOf(contact_name.get(position)));
         holder.contact_phone_txt.setText(String.valueOf(contact_phone.get(position)));
         holder.contact_birthday_txt.setText(String.valueOf(contact_birthday.get(position)));
@@ -76,7 +76,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return contact_id.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView contact_id_txt, contact_name_txt, contact_phone_txt, contact_birthday_txt;
         LinearLayout mainLayout;

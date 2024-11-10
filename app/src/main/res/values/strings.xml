@@ -10,7 +10,7 @@
     <string name="birthday_placeholder">01/01</string>
     <string name="phone_number_placeholder">+55 (99)99999-9999</string>
     <string name="name_placeholder">Fulano da Silva</string>
-    <string name="id_placeholder">1</string>
+    <string name="id_placeholder">FS</string>
     <string name="confirm_delete_message">"Tem certeza que deseja excluir "</string>
     <string name="no_contact2">Nenhum contato cadastrado.</string>
     <string name="save">Salvar</string>
