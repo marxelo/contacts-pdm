@@ -7,11 +7,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.marcelo.contatos.utils.DbHelper;
 import com.marcelo.contatos.utils.Utils;
 
-public class ShowActivity extends AppCompatActivity {
+public class DeleteActivity extends AppCompatActivity {
     TextView initials_input, name_input, phone_input, birthday_input;
 
     String id, initials, name, phone, birthday;
@@ -30,12 +32,11 @@ public class ShowActivity extends AppCompatActivity {
         getAndSetIntentData();
 
         ActionBar actionBar = getSupportActionBar();
-        delete_button.setVisibility(View.GONE);
 
         if (actionBar != null) {
             actionBar.setTitle(name);
         }
-
+        delete_button.setOnClickListener(v -> confirmDialog());
     }
 
 
@@ -57,6 +58,22 @@ public class ShowActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, R.string.no_contact, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    void confirmDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(DeleteActivity.this);
+        builder.setTitle(getString(R.string.delete) + " " + name + "?");
+        builder.setMessage(getString(R.string.confirm_delete_message) + name + "?");
+        builder.setPositiveButton("Sim", (dialog, which) -> {
+            try (DbHelper dbHelper = new DbHelper(DeleteActivity.this)) {
+                dbHelper.deleteOneRow(id);
+            }
+            finish();
+        });
+        builder.setNegativeButton("Não", (dialog, which) -> {
+
+        });
+        builder.create().show();
     }
 
 }

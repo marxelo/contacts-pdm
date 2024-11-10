@@ -3,7 +3,6 @@ package com.marcelo.contatos;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marcelo.contatos.utils.Utils;
@@ -58,16 +57,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.contact_name_txt.setText(String.valueOf(contact_name.get(position)));
         holder.contact_phone_txt.setText(String.valueOf(contact_phone.get(position)));
         holder.contact_birthday_txt.setText(String.valueOf(contact_birthday.get(position)));
-        //Recyclerview onClickListener
-        holder.mainLayout.setOnLongClickListener(view -> {
-            Intent intent = new Intent(context, UpdateActivity.class);
-            intent.putExtra("id", String.valueOf(contact_id.get(position)));
-            intent.putExtra("name", String.valueOf(contact_name.get(position)));
-            intent.putExtra("phone", String.valueOf(contact_phone.get(position)));
-            intent.putExtra("birthday", String.valueOf(contact_birthday.get(position)));
-            activity.startActivityForResult(intent, 1);
-            return false;
-        });
 
         holder.mainLayout.setOnClickListener(view -> {
             Intent intent = new Intent(context, ShowActivity.class);
@@ -101,6 +90,46 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             mainLayout.setAnimation(translate_anim);
         }
 
+    }
+
+    public void attachSwipeHandler(RecyclerView recyclerView) {
+        ItemTouchHelper.SimpleCallback swipeCallback =
+
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Intent intent;
+
+                        if (direction == ItemTouchHelper.RIGHT) {
+                            intent = new Intent(context, UpdateActivity.class);
+                        } else {
+                            intent = new Intent(context, DeleteActivity.class);
+                        }
+
+                        intent.putExtra("id", String.valueOf(contact_id.get(position)));
+                        intent.putExtra("name", String.valueOf(contact_name.get(position)));
+                        intent.putExtra("phone", String.valueOf(contact_phone.get(position)));
+                        intent.putExtra("birthday", String.valueOf(contact_birthday.get(position)));
+
+                        if (direction == ItemTouchHelper.RIGHT) {
+                            activity.startActivityForResult(intent, 1);
+                        } else {
+                            activity.startActivityForResult(intent, 2);
+                        }
+                        notifyItemChanged(position); // Reset the item's position
+
+                    }
+                };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
 }

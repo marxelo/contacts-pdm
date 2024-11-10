@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> contact_id, contact_name, contact_phone, contact_birthday;
     CustomAdapter customAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +61,14 @@ public class MainActivity extends AppCompatActivity {
         customAdapter = new CustomAdapter(MainActivity.this,this, contact_id, contact_name, contact_phone,
                 contact_birthday);
         recyclerView.setAdapter(customAdapter);
+        customAdapter.attachSwipeHandler(recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1){
+        if(requestCode == 1 || requestCode == 2){
             recreate();
         }
     }
