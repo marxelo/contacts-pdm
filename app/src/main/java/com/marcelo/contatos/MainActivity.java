@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton add_button;
     ImageView empty_imageview;
-    TextView no_data;
+    TextView no_data, swipe_hint;
     DbHelper dbHelper;
     ArrayList<String> contact_id, contact_name, contact_phone, contact_birthday;
     CustomAdapter customAdapter;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         add_button = findViewById(R.id.add_button);
         empty_imageview = findViewById(R.id.empty_imageview);
         no_data = findViewById(R.id.no_data);
+        swipe_hint = findViewById(R.id.swipe_hint);
         add_button.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddActivity.class);
             addActivityLauncher.launch(intent);
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         if(cursor.getCount() == 0){
             empty_imageview.setVisibility(View.VISIBLE);
             no_data.setVisibility(View.VISIBLE);
+            swipe_hint.setVisibility(View.VISIBLE);
         }else{
             while (cursor.moveToNext()){
                 contact_id.add(cursor.getString(0));
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
             empty_imageview.setVisibility(View.GONE);
             no_data.setVisibility(View.GONE);
+            swipe_hint.setVisibility(View.GONE);
         }
     }
 }

@@ -10,6 +10,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import androidx.core.content.ContextCompat;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -96,6 +102,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         ItemTouchHelper.SimpleCallback swipeCallback =
 
                 new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+
+                    private final Drawable deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete);
+                    private final Drawable editIcon = ContextCompat.getDrawable(context, R.drawable.ic_edit);
+                    private final ColorDrawable background = new ColorDrawable();
+                    private final Paint textPaint = new Paint();
                     @Override
                     public boolean onMove(@NonNull RecyclerView recyclerView,
                                           @NonNull RecyclerView.ViewHolder viewHolder,
@@ -127,7 +138,56 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                         notifyItemChanged(position); // Reset the item's position
 
                     }
+                    @Override
+                    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                            @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY,
+                                            int actionState, boolean isCurrentlyActive) {
+
+                        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+                        View itemView = viewHolder.itemView;
+                        int backgroundCornerOffset = 20;
+
+                        if (dX > 0) { // Swiping to the right
+                            background.setColor(Color.parseColor("#388E3C"));
+                            background.setBounds(itemView.getLeft(), itemView.getTop(),
+                                    itemView.getLeft() + ((int) dX) + backgroundCornerOffset, itemView.getBottom());
+                            background.draw(c);
+
+                            if (editIcon != null) {
+                                int iconMargin = (itemView.getHeight() - editIcon.getIntrinsicHeight()) / 2;
+                                int iconTop = itemView.getTop() + (itemView.getHeight() - editIcon.getIntrinsicHeight()) / 2;
+                                int iconBottom = iconTop + editIcon.getIntrinsicHeight();
+                                int iconLeft = itemView.getLeft() + iconMargin;
+                                int iconRight = iconLeft + editIcon.getIntrinsicWidth();
+
+                                editIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                                editIcon.draw(c);
+                            }
+
+                        } else if (dX < 0) { // Swiping to the left
+                            background.setColor(Color.parseColor("#D32F2F"));
+                            background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
+                                    itemView.getTop(), itemView.getRight(), itemView.getBottom());
+                            background.draw(c);
+
+                            if (deleteIcon != null) {
+                                int iconMargin = (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
+                                int iconTop = itemView.getTop() + (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
+                                int iconBottom = iconTop + deleteIcon.getIntrinsicHeight();
+                                int iconRight = itemView.getRight() - iconMargin;
+                                int iconLeft = iconRight - deleteIcon.getIntrinsicWidth();
+
+                                deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
+                                deleteIcon.draw(c);
+                            }
+                        }
+                    }
+
+
                 };
+
+
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }

@@ -16,4 +16,5 @@
     <string name="save">Salvar</string>
     <string name="alt_cake">Icone bolo de aniversário</string>
     <string name="alt_phone">Icone telefone</string>
+    <string name="swipe_hint_text">DICA: Deslize o contato para esquerda ou direita para editar ou excluir</string>
 </resources>

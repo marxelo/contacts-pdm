@@ -85,7 +85,7 @@ public class Utils {
         }
 
         if (!isValidDate(birthday)) {
-            Toast.makeText(context, "Data de aniversário inválida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Informe dia e mês do aniversário", Toast.LENGTH_SHORT).show();
             return false;
         }
 

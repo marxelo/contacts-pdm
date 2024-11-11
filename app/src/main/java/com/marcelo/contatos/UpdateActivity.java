@@ -43,10 +43,17 @@ public class UpdateActivity extends AppCompatActivity {
                     phone_input.getText().toString().trim(),
                     birthday_input.getText().toString().trim(),
                     UpdateActivity.this)) {
+                String bday = "";
+                if (birthday_input.getText().toString().trim().contains("/")) {
+                    bday = birthday_input.getText().toString().trim();
+                } else {
+                    String bd = birthday_input.getText().toString().trim();
+                    bday = bd.substring(0, 2) + "/" + bd.substring(2);
+                }
                 try (DbHelper dbHelper = new DbHelper(UpdateActivity.this)) {
                     name = name_input.getText().toString().trim();
                     phone = phone_input.getText().toString().trim();
-                    birthday = birthday_input.getText().toString().trim();
+                    birthday = bday;
                     dbHelper.updateData(id, name, phone, birthday);
                 }
                 finish();
