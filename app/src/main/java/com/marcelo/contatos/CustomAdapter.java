@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
+//import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import androidx.core.content.ContextCompat;
@@ -106,7 +106,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     private final Drawable deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete);
                     private final Drawable editIcon = ContextCompat.getDrawable(context, R.drawable.ic_edit);
                     private final ColorDrawable background = new ColorDrawable();
-                    private final Paint textPaint = new Paint();
+//                    private final Paint textPaint = new Paint();
                     @Override
                     public boolean onMove(@NonNull RecyclerView recyclerView,
                                           @NonNull RecyclerView.ViewHolder viewHolder,

@@ -3,12 +3,11 @@ package com.marcelo.contatos.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.marcelo.contatos.AddActivity;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Utils {
     public static String getInitials(String str) {
@@ -56,9 +55,15 @@ public class Utils {
     }
 
     public static boolean isValidDate(String dateString) {
+        String regex = "^\\d{4}$|^\\d{2}/\\d{2}$";
+
+        if (!dateString.matches(regex) ) {
+            return  false;
+        }
+
         SimpleDateFormat[] formats = {
-                new SimpleDateFormat("dd/MM"),
-                new SimpleDateFormat("ddMM")
+                new SimpleDateFormat("dd/MM", Locale.forLanguageTag("pt_BR")),
+                new SimpleDateFormat("ddMM", Locale.forLanguageTag("pt_BR"))
         };
 
         for (SimpleDateFormat format : formats) {

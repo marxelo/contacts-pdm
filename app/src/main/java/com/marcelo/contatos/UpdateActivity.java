@@ -43,7 +43,7 @@ public class UpdateActivity extends AppCompatActivity {
                     phone_input.getText().toString().trim(),
                     birthday_input.getText().toString().trim(),
                     UpdateActivity.this)) {
-                String bday = "";
+                String bday;
                 if (birthday_input.getText().toString().trim().contains("/")) {
                     bday = birthday_input.getText().toString().trim();
                 } else {

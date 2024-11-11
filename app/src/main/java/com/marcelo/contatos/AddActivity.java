@@ -34,7 +34,7 @@ public class AddActivity extends AppCompatActivity {
                     birthday_input.getText().toString().trim(),
                     AddActivity.this)) {
                 try (DbHelper dbHelper = new DbHelper(AddActivity.this)) {
-                    String birthday = "";
+                    String birthday;
                     if (birthday_input.getText().toString().trim().contains("/")) {
                         birthday = birthday_input.getText().toString().trim();
                     } else {

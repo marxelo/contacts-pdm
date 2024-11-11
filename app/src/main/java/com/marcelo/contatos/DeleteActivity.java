@@ -1,7 +1,6 @@
 package com.marcelo.contatos;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,7 +47,7 @@ public class DeleteActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             phone = getIntent().getStringExtra("phone");
             birthday = getIntent().getStringExtra("birthday");
-            initials = Utils.getInitials(String.valueOf(name.toUpperCase()));
+            initials = Utils.getInitials(name.toUpperCase());
 
             //Setting Intent Data
             initials_input.setText(initials);

@@ -47,7 +47,7 @@ public class ShowActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             phone = getIntent().getStringExtra("phone");
             birthday = getIntent().getStringExtra("birthday");
-            initials = Utils.getInitials(String.valueOf(name.toUpperCase()));
+            initials = Utils.getInitials(name.toUpperCase());
 
             //Setting Intent Data
             initials_input.setText(initials);
